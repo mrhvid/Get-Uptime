@@ -4,8 +4,9 @@
 .DESCRIPTION
    Uses WMI call to retrive uptime. Get-WmiObject -Class Win32_OperatingSystem
 .EXAMPLE
-Get-Uptime da12345, localhost, blah -Verbose
+Get-Uptime -ComputerName da12345, localhost, blah -Verbose
 
+VERBOSE: blah does not reply to ping
 Online ComputerName TotalDays TotalHours
 ------ ------------ --------- ----------
   True da42323      1,2       28,89
@@ -20,11 +21,14 @@ Online ComputerName TotalDays TotalHours
   True localhost    3,07      73,72
 
 .EXAMPLE
-Get-Uptime
+'localhost', 'NonExistingPC', '127.0.0.1' | Get-Uptime
 
-Online ComputerName TotalDays TotalHours
------- ------------ --------- ----------
-  True localhost    3,07      73,72
+Online ComputerName  TotalDays TotalHours
+------ ------------  --------- ----------
+  True localhost     2,95      70,87
+ False NonExistingPC n/a       n/a
+  True 127.0.0.1     2,95      70,87
+
 #>
 function Get-Uptime
 {
@@ -35,6 +39,7 @@ function Get-Uptime
         # List of ComputerNames 
         [Parameter(Mandatory=$false,
                    ValueFromPipelineByPropertyName=$true,
+                   ValueFromPipeline=$true,
                    Position=0)]
         [string[]]
         $ComputerName = 'localhost'
