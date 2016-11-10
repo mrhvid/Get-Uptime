@@ -18,6 +18,13 @@ Get-Uptime
 Online ComputerName TotalDays TotalHours
 ------ ------------ --------- ----------
   True localhost    3,07      73,72
+
+.EXAMPLE
+Get-Uptime
+
+Online ComputerName TotalDays TotalHours
+------ ------------ --------- ----------
+  True localhost    3,07      73,72
 #>
 function Get-Uptime
 {
@@ -25,7 +32,7 @@ function Get-Uptime
     [Alias()]
     Param
     (
-        # Param1 help description
+        # List of ComputerNames 
         [Parameter(Mandatory=$false,
                    ValueFromPipelineByPropertyName=$true,
                    Position=0)]
@@ -34,8 +41,7 @@ function Get-Uptime
     )
 
     Begin
-    {
-    }
+    {}
     Process
     {
 
@@ -82,9 +88,8 @@ function Get-Uptime
                                                }
 
             }
-        }
+        } # End foreach
     }
     End
-    {
-    }
+    {}
 }
