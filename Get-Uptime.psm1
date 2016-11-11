@@ -61,6 +61,7 @@ function Get-Uptime
                     New-Object psobject -Property @{ComputerName=$Computer;
                                                     TotalHours=((($wmi.ConvertToDateTime($wmi.LocalDateTime) - $wmi.ConvertToDateTime($wmi.LastBootUpTime))).TotalHours).tostring("##.##"); 
                                                     TotalDays=(($wmi.ConvertToDateTime($wmi.LocalDateTime) - $wmi.ConvertToDateTime($wmi.LastBootUpTime))).TotalDays.tostring("##.##");
+                                                    LastBootUpTime=$wmi.ConvertToDateTime($wmi.LastBootUpTime);
                                                     Online=$true;
                                                    }
 
@@ -71,6 +72,7 @@ function Get-Uptime
                     New-Object psobject -Property @{ComputerName=$Computer;
                                     TotalHours='n/a'; 
                                     TotalDays='n/a';
+                                    LastBootUpTime='n/a';
                                     Online=$true;
                                     }
                 }
@@ -80,6 +82,7 @@ function Get-Uptime
                     New-Object psobject -Property @{ComputerName=$Computer;
                                     TotalHours='n/a'; 
                                     TotalDays='n/a';
+                                    LastBootUpTime='n/a';
                                     Online=$true;
                                     }
                 }
@@ -89,6 +92,7 @@ function Get-Uptime
                 New-Object psobject -Property @{ComputerName=$Computer;
                                                 TotalHours='n/a'; 
                                                 TotalDays='n/a';
+                                                LastBootUpTime='n/a';
                                                 Online=$false;
                                                }
 
